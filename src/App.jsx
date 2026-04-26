@@ -81,6 +81,32 @@ const initClientes = [
     agenda: [],
     bilan: { q1: "", q2: "", q3: "" },
   },
+  {
+    id: 3, prenom: "Hikmate", business: "Équilibre Pédagogique", etape: 1,
+    taches: [],
+    victoires: [],
+    seances: [
+      { id: 1, date: "26 avr 2026", theme: "Séance 1 — Clarté & Vision", notes: "Première séance. Exploration du projet, des forces et de la vision.", actions: "Définir sa cible idéale et sa promesse de valeur avant la prochaine séance." },
+    ],
+    messages: [
+      { id: 1, auteur: "Mentor", texte: "Bienvenue dans Le Laboratoire, Hikmate ! Contente de t'accompagner dans cette aventure.", heure: "08:00" },
+    ],
+    agenda: [],
+    bilan: { q1: "", q2: "", q3: "" },
+  },
+  {
+    id: 4, prenom: "Samya", business: "Équilibre Pédagogique", etape: 1,
+    taches: [],
+    victoires: [],
+    seances: [
+      { id: 1, date: "26 avr 2026", theme: "Séance 1 — Clarté & Vision", notes: "Première séance. Exploration du projet, des forces et de la vision.", actions: "Définir sa cible idéale et sa promesse de valeur avant la prochaine séance." },
+    ],
+    messages: [
+      { id: 1, auteur: "Mentor", texte: "Bienvenue dans Le Laboratoire, Samya ! Contente de t'accompagner dans cette aventure.", heure: "08:00" },
+    ],
+    agenda: [],
+    bilan: { q1: "", q2: "", q3: "" },
+  },
 ];
 
 const ETAPES_LABELS = ["Clarté & Vision", "Offre & Positionnement", "Modèle économique", "Lancement", "Structuration", "Croissance"];
