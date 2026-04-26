@@ -128,10 +128,10 @@ const initClientes = [
 const ETAPES_LABELS = ["Clarté & Vision", "Offre & Positionnement", "Modèle économique", "Lancement", "Structuration", "Croissance"];
 
 const initRessources = [
-  { id: 1, titre: "Les 5 erreurs de positionnement", theme: "Positionnement", type: "Fiche PDF" },
-  { id: 2, titre: "Fixer ses prix sans se brader", theme: "Finances", type: "Article" },
-  { id: 3, titre: "Trouver sa cible en 3 étapes", theme: "Offre", type: "Exercice" },
-  { id: 4, titre: "Dépasser le syndrome de l'imposteur", theme: "Mindset", type: "Masterclass" },
+  { id: 1, titre: "Les 5 erreurs de positionnement", theme: "Positionnement", type: "Fiche PDF", lien: null },
+  { id: 2, titre: "Fixer ses prix sans se brader", theme: "Finances", type: "Article", lien: null },
+  { id: 3, titre: "Trouver sa cible en 3 étapes", theme: "Offre", type: "Exercice", lien: null },
+  { id: 4, titre: "Dépasser le syndrome de l'imposteur", theme: "Mindset", type: "Masterclass", lien: null },
 ];
 
 const CLIENT_TABS = [
@@ -407,14 +407,18 @@ export default function App() {
             {clienteTab === "bibliotheque" && (
               <CARD>
                 <SEC icon="📚" title="Ma Bibliothèque" />
+                <p style={{ fontSize: 13, color: C.textL, marginBottom: 14 }}>Tes ressources exclusives, ajoutées au fil de ton parcours.</p>
                 {ressources.map(r => (
-                  <div key={r.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", borderRadius: 10, background: C.beige, border: `1px solid ${C.beigeD}`, marginBottom: 8 }}>
+                  <div key={r.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", borderRadius: 10, background: r.lien ? C.beige : "#f9f4ef", border: `1px solid ${C.beigeD}`, marginBottom: 8, opacity: r.lien ? 1 : 0.7 }}>
                     <div style={{ fontSize: 18 }}>{r.type === "Fiche PDF" ? "📄" : r.type === "Article" ? "📝" : r.type === "Exercice" ? "✏️" : r.type === "Masterclass" ? "🎬" : "📋"}</div>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 13, fontWeight: "bold" }}>{r.titre}</div>
                       <div style={{ fontSize: 11, color: C.textL }}>{r.theme} · {r.type}</div>
                     </div>
-                    <button style={{ padding: "5px 12px", borderRadius: 8, border: "none", background: C.beigeD, color: C.tc, fontSize: 12, cursor: "pointer", fontWeight: "bold" }}>→</button>
+                    {r.lien
+                      ? <a href={r.lien} target="_blank" rel="noreferrer" style={{ padding: "5px 12px", borderRadius: 8, border: "none", background: C.tc, color: "#fff", fontSize: 12, cursor: "pointer", fontWeight: "bold", textDecoration: "none" }}>→ Ouvrir</a>
+                      : <span style={{ padding: "5px 12px", borderRadius: 8, background: C.beigeDD, color: C.textL, fontSize: 11, fontStyle: "italic" }}>Bientôt</span>
+                    }
                   </div>
                 ))}
               </CARD>
