@@ -145,11 +145,42 @@ const CLIENT_TABS = [
   { id: "bibliotheque", label: "📚 Bibliothèque" },
 ];
 
+const ACCESS_CODES = {
+  "hikmate-7x2k": { type: "client", clienteId: 3 },
+  "samya-9p4m":   { type: "client", clienteId: 4 },
+  "salma-3w8n":   { type: "client", clienteId: 1 },
+  "imane-5q1r":   { type: "client", clienteId: 2 },
+  "nadia-admin-2026": { type: "admin" },
+};
+
+function getAccess() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("c");
+  return code ? ACCESS_CODES[code] || null : null;
+}
+
+function AccessDenied() {
+  return (
+    <div style={{ fontFamily: "Georgia, serif", minHeight: "100vh", background: "#F5EDE3", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ textAlign: "center", padding: 40 }}>
+        <div style={{ fontSize: 36, marginBottom: 16 }}>✦</div>
+        <div style={{ fontSize: 22, fontWeight: "bold", color: "#9B4E2A", marginBottom: 12 }}>Le Laboratoire</div>
+        <div style={{ fontSize: 14, color: "#7A5C46", maxWidth: 300, lineHeight: 1.6 }}>
+          Ce lien n'est pas valide.<br />Contacte Nadia pour recevoir ton accès personnel.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
-  const [mode, setMode] = useState("client");
+  const access = getAccess();
+  const [mode, setMode] = useState(access?.type === "admin" ? "admin" : "client");
   const [clientes, setClientes] = useState(initClientes);
   const [ressources, setRessources] = useState(initRessources);
-  const [selectedClienteId, setSelectedClienteId] = useState(1);
+  const [selectedClienteId, setSelectedClienteId] = useState(
+    access?.type === "client" ? access.clienteId : 1
+  );
   const [clienteTab, setClienteTab] = useState("parcours");
   const [adminTab, setAdminTab] = useState("vue");
   const [newTache, setNewTache] = useState("");
@@ -190,6 +221,8 @@ export default function App() {
 
   const pct = Math.round((cliente.etape / ETAPES_LABELS.length) * 100);
 
+  if (!access) return <AccessDenied />;
+
   return (
     <div style={{ fontFamily: "Georgia, serif", minHeight: "100vh", background: mode === "admin" ? C.admin : C.beige }}>
       {/* HEADER */}
@@ -198,22 +231,26 @@ export default function App() {
           <div style={{ color: "#fff", fontSize: 20, fontWeight: "bold", letterSpacing: 1 }}>✦ Le Laboratoire</div>
           <div style={{ color: C.orL, fontSize: 11, marginTop: 2 }}>{mode === "admin" ? "Panneau Mentor — Nadia" : `Espace de ${cliente.prenom} · ${cliente.business}`}</div>
         </div>
-        <button onClick={() => setMode(m => m === "admin" ? "client" : "admin")} style={{ padding: "7px 16px", borderRadius: 20, border: `1.5px solid ${C.or}`, background: "transparent", color: C.or, fontSize: 12, fontWeight: "bold", cursor: "pointer" }}>
-          {mode === "admin" ? "👤 Vue Cliente" : "⚙️ Admin"}
-        </button>
+        {access?.type === "admin" && (
+          <button onClick={() => setMode(m => m === "admin" ? "client" : "admin")} style={{ padding: "7px 16px", borderRadius: 20, border: `1.5px solid ${C.or}`, background: "transparent", color: C.or, fontSize: 12, fontWeight: "bold", cursor: "pointer" }}>
+            {mode === "admin" ? "👤 Vue Cliente" : "⚙️ Admin"}
+          </button>
+        )}
       </div>
 
       {/* MODE CLIENT */}
       {mode === "client" && (
         <>
-          <div style={{ background: C.blanc, borderBottom: `1px solid ${C.beigeD}`, padding: "10px 20px", display: "flex", gap: 10, alignItems: "center" }}>
-            <span style={{ fontSize: 12, color: C.textL }}>Cliente :</span>
-            {clientes.map(c => (
-              <button key={c.id} onClick={() => setSelectedClienteId(c.id)} style={{ padding: "5px 14px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 12, fontWeight: selectedClienteId === c.id ? "bold" : "normal", background: selectedClienteId === c.id ? C.tc : C.beigeD, color: selectedClienteId === c.id ? "#fff" : C.textL }}>
-                {c.prenom}
-              </button>
-            ))}
-          </div>
+          {access?.type === "admin" && (
+            <div style={{ background: C.blanc, borderBottom: `1px solid ${C.beigeD}`, padding: "10px 20px", display: "flex", gap: 10, alignItems: "center" }}>
+              <span style={{ fontSize: 12, color: C.textL }}>Cliente :</span>
+              {clientes.map(c => (
+                <button key={c.id} onClick={() => setSelectedClienteId(c.id)} style={{ padding: "5px 14px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 12, fontWeight: selectedClienteId === c.id ? "bold" : "normal", background: selectedClienteId === c.id ? C.tc : C.beigeD, color: selectedClienteId === c.id ? "#fff" : C.textL }}>
+                  {c.prenom}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div style={{ background: C.blanc, borderBottom: `2px solid ${C.beigeD}`, display: "flex", overflowX: "auto" }}>
             {CLIENT_TABS.map(t => (
