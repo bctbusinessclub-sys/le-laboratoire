@@ -83,7 +83,13 @@ const initClientes = [
   },
   {
     id: 3, prenom: "Hikmate", business: "Équilibre Pédagogique", etape: 1,
-    taches: [],
+    taches: [
+      { id: 1, texte: "Mission 01 — Interviewer 5 à 8 personnes (client idéal)", priorite: "haute", statut: "à faire" },
+      { id: 2, texte: "Mission 02 — Écrire 5 versions de la phrase d'ascenseur", priorite: "haute", statut: "à faire" },
+      { id: 3, texte: "Mission 03 — Auditer 3 à 5 acteurs similaires (offre, prix, positionnement)", priorite: "moyenne", statut: "à faire" },
+      { id: 4, texte: "Mission 04 — Rédiger la lettre à la cliente idéale", priorite: "moyenne", statut: "à faire" },
+      { id: 5, texte: "Mission 05 — Répondre : quelle est ta vision personnelle du succès ?", priorite: "moyenne", statut: "à faire" },
+    ],
     victoires: [],
     seances: [
       { id: 1, date: "26 avr 2026", theme: "Séance 1 — Clarté & Vision", notes: "Première séance. Exploration du projet, des forces et de la vision.", actions: "Définir sa cible idéale et sa promesse de valeur avant la prochaine séance." },
@@ -91,12 +97,20 @@ const initClientes = [
     messages: [
       { id: 1, auteur: "Mentor", texte: "Bienvenue dans Le Laboratoire, Hikmate ! Contente de t'accompagner dans cette aventure.", heure: "08:00" },
     ],
-    agenda: [],
+    agenda: [
+      { id: 1, date: "29 avr 2026", heure: "12h30", titre: "Séance 2 — Offre & Positionnement", type: "Séance" },
+    ],
     bilan: { q1: "", q2: "", q3: "" },
   },
   {
     id: 4, prenom: "Samya", business: "Équilibre Pédagogique", etape: 1,
-    taches: [],
+    taches: [
+      { id: 1, texte: "Mission 01 — Interviewer 5 à 8 personnes (client idéal)", priorite: "haute", statut: "à faire" },
+      { id: 2, texte: "Mission 02 — Écrire 5 versions de la phrase d'ascenseur", priorite: "haute", statut: "à faire" },
+      { id: 3, texte: "Mission 03 — Auditer 3 à 5 acteurs similaires (offre, prix, positionnement)", priorite: "moyenne", statut: "à faire" },
+      { id: 4, texte: "Mission 04 — Rédiger la lettre à la cliente idéale", priorite: "moyenne", statut: "à faire" },
+      { id: 5, texte: "Mission 05 — Répondre : quelle est ta vision personnelle du succès ?", priorite: "moyenne", statut: "à faire" },
+    ],
     victoires: [],
     seances: [
       { id: 1, date: "26 avr 2026", theme: "Séance 1 — Clarté & Vision", notes: "Première séance. Exploration du projet, des forces et de la vision.", actions: "Définir sa cible idéale et sa promesse de valeur avant la prochaine séance." },
@@ -104,7 +118,9 @@ const initClientes = [
     messages: [
       { id: 1, auteur: "Mentor", texte: "Bienvenue dans Le Laboratoire, Samya ! Contente de t'accompagner dans cette aventure.", heure: "08:00" },
     ],
-    agenda: [],
+    agenda: [
+      { id: 1, date: "29 avr 2026", heure: "12h30", titre: "Séance 2 — Offre & Positionnement", type: "Séance" },
+    ],
     bilan: { q1: "", q2: "", q3: "" },
   },
 ];
